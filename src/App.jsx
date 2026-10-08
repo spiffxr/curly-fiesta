@@ -33,11 +33,22 @@ const App = () => {
     setTasks([...tasks, newTask]);
   };
 
+  const toggleTask = (taskId) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, isComplete: !task.isComplete };
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <h1>Tasks</h1>
       <TaskForm addTask={addTask} />
-      {tasks.length > 0 ? <TaskList tasks={tasks} /> : <p>Add some tasks...</p>}
+      {tasks.length > 0 ? <TaskList tasks={tasks} toggleTask={toggleTask} /> : <p>Add some tasks...</p>}
     </>
   );
 };
